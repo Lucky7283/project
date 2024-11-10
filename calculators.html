@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <title>Calculators</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="initial-scale=1.0">
+  <style>
+    #bp,#bp2{
+      box-shadow: 1px 1px 1px; 
+      width: 250px ;
+      height: 40px; 
+      position: absolute;
+      left: 110px;
+      top: 15px;
+    }
+    #sp,#sp2{
+      box-shadow: 1px 1px 1px; 
+      width: 250px ;
+      height: 40px; 
+      position: absolute;
+      left: 110px;
+      top: 55px;
+    }
+    #c,#c2{
+      box-shadow: 1px 1px 1px; 
+      width: 250px ;
+      height: 40px; 
+      position: absolute;
+      left: 110px;
+      top: 100px;
+    }
+    #out,#out2{
+      position: absolute;
+      left: 400px;
+      top: 0px;
+      width: 700px;
+      height: 700px;
+      overflow-y: auto;
+      font-size: 31px;
+    }
+    #bu,#bu2{
+      width: 90px;
+      height: 100px;
+    }
+    #t2{
+      position: absolute;
+      top: 0px;
+      right: 100px;
+      width: 100px;
+      height: 50px;
+    }
+#bs{
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      width: 100px;
+      height: 50px;
+}
+    #bu2,#c2,#sp2,#bp2,#out2,#name2{
+      display: none;
+    }
+#name,#name2{
+  position: absolute;
+  top: 90px;
+  left: 5px;
+}
+#clear{
+  position: absolute;
+  bottom: 0px;
+  left: 5px;
+  height: 70px;
+  width: 200px;
+  text-align: center;
+}
+#bu,#bu2,#bs,#t2,#clear{
+  background: #006dfb;
+  color: white;
+}
+  </style>
+</head>
+<body>
+  <h3 id="name">sell/buy</h3>
+  <h3 id="name2">t2 resource</h3>
+  <div id="out2"></div>
+  <div id="out"></div>
+  <input id="bp" placeholder="The buy price">
+  <input id="sp" placeholder="The sell price">
+  <input id="c" placeholder="count">
+  <input id="bp2" placeholder="The buy pricec">
+  <input id="sp2" placeholder="The sell pricec">
+  <input id="c2" placeholder="countc">
+  <button id="bu" onclick="call1()">calculates</button>
+  <button id="bu2" onclick="call2()">calculates</button>
+  <button id="bs" onclick="k1()">buy/sell</button>
+  <button id="t2" onclick="k2()">t2 resource</button>
+  <button id="clear" onclick="emty()">clear the around</button>
+  <script>
+    function k2(){
+    document.getElementById("bp").style.display="none";
+    document.getElementById("sp").style.display="none";
+    document.getElementById("c").style.display="none";
+    document.getElementById("bu").style.display="none";
+    document.getElementById("out").style.display="none";
+    document.getElementById("name").style.display="none";
+    document.getElementById("bp2").style.display="block";
+    document.getElementById("sp2").style.display="block";
+    document.getElementById("c2").style.display="block";
+    document.getElementById("bu2").style.display="block";
+    document.getElementById("out2").style.display="block";
+    document.getElementById("name2").style.display="block";
+    }
+    function k1(){
+    document.getElementById("bp").style.display="block";
+    document.getElementById("sp").style.display="block";
+    document.getElementById("c").style.display="block";
+    document.getElementById("bu").style.display="block";
+    document.getElementById("out").style.display="block";
+    document.getElementById("name").style.display="block";
+    document.getElementById("bp2").style.display="none";
+    document.getElementById("sp2").style.display="none";
+    document.getElementById("c2").style.display="none";
+    document.getElementById("bu2").style.display="none";
+    document.getElementById("out2").style.display="none";
+    document.getElementById("name2").style.display="none";
+    }  
+    function call2(){
+      // t2 resource recyling
+      let a= Number(document.getElementById("bp2").value);
+      let b=Number(document.getElementById("sp2").value);
+      let c=Number(document.getElementById("c2").value);
+      let m=c*a+(a*c*0.025)
+      let d=0
+      while (c>1){
+        d=d+c
+        console.log(d.toFixed(0))
+        c=0.152*c
+        console.log(c.toFixed(0))
+      }
+      document.getElementById("out2").innerHTML += `<p>  Invest: ${m.toFixed(0)}</p>`;
+      document.getElementById("out2").innerHTML += `<p>  Profit: ${(d * b - ((d * b * 0.105) + m)).toFixed(0)}</p>`;
+      document.getElementById("out2").innerHTML += `<p>  Count resource: ${d.toFixed(0)}<hr></p>`;
+    }
+    function call1(){
+      //sell buy
+      let a= Number(document.getElementById("bp").value);
+      let b=Number(document.getElementById("sp").value);
+      let c=Number(document.getElementById("c").value);
+      var d=(a*c)+(a*c*0.025);     
+      document.getElementById("out").innerHTML+=`<p>  вложение ${Number(d).toFixed(0)}</p>`;
+      document.getElementById("out").innerHTML+=`<p>  прибль ${c*b-(d+(c*b*0.105)).toFixed(0)} <hr></p>`;
+    }
+    function emty(){
+      document.getElementById("out").innerHTML=`answers: <hr>`
+      document.getElementById("out2").innerHTML=`answers: <hr>`
+    }
+    document.addEventListener('DOMContentLoaded', emty); 
+</script>
+</body>
+</html>
